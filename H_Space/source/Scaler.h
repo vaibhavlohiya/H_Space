@@ -7,7 +7,7 @@
 class Scaler
 {
 public:
-	float m_Data;
+	float m_Value = 0;
 
 	// Class Constructors
 

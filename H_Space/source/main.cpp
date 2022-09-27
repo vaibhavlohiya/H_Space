@@ -6,10 +6,10 @@
 
 int main()
 {
-	Scaler x1(5.1f), x2(3.1f), x3(6.3f);
-	Scaler y1(1.3f), y2(6.4f), y3(5.2f);
+	Scaler x1(5.1f), x2(3.1f), x3(6.3f), x4(5.5f);
+	Scaler y1(1.3f), y2(6.4f), y3(5.2f), y4(8.2f);
 
-	Scaler sum = x1 + x2;       // Add
+	Scaler sum  = x1 + x2;       // Add
 	Scaler diff = x1 - x2;		// Subtract 
 	Scaler prod = x1 * x2;		// Multiply
 	Scaler quot = x1 / x2;		// Divide
@@ -21,8 +21,8 @@ int main()
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
 
-	std::array<Scaler, 3> x_axis = { x1, x2, x3 };
-	std::array<Scaler, 3> y_axis = { y1, y2, y3 };
+	std::array<Scaler, 4> x_axis = { x1, x2, x3, x4 };
+	std::array<Scaler, 4> y_axis = { y1, y2, y3, y4 };
 
 	Vector v1(x_axis), v2(y_axis);
 
@@ -42,7 +42,7 @@ int main()
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << std::endl;
 
 	Vector vec_cross = v1 * v2; // Cross product two vectors
-	std::cout << "The difference b/w two vectors v1 and v2 is " << vec_cross << std::endl;
+	std::cout << "The cross product b/w two vectors v1 and v2 is " << vec_cross << std::endl;
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
 

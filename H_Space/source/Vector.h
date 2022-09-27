@@ -9,7 +9,7 @@
 class Vector
 {
 public:
-	static const size_t m_Size = 3;
+	static const size_t m_Size = 4;
 	std::array<Scaler, m_Size> m_Data;
 	
 	// Class Constructors
