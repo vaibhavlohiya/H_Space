@@ -27,11 +27,9 @@ public:
 
 	// Class Operator Overloads
 
-	//Vector operator+(const Vector& other);
-	//Vector operator-(const Vector& other);
-	//Vector operator*(const Vector& other);
-	//Vector operator**(const Vector& other);
-	//Vector Divide(const Vector& other);*/
+	Vector operator+(const Vector& other);  // Addition operator 
+	Vector operator-(const Vector& other);  // Subtraction operator
+	Vector operator*(const Vector& other);  // Multiplication operator for cross product
 
 	Scaler& operator[](size_t index);
 	const Scaler& operator[](size_t index) const;

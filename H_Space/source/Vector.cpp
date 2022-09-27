@@ -19,7 +19,29 @@ Vector Vector::Add(const Vector& other)
 	return V;
 }
 
+Vector Vector::operator+(const Vector& other)
+{
+	Vector V;
+
+	V.m_Data[0] = m_Data[0] + other.m_Data[0];
+	V.m_Data[1] = m_Data[1] + other.m_Data[1];
+	V.m_Data[2] = m_Data[2] + other.m_Data[2];
+
+	return V;
+}
+
 Vector Vector::Subtract(const Vector& other)
+{
+	Vector V;
+
+	V.m_Data[0] = m_Data[0] - other.m_Data[0];
+	V.m_Data[1] = m_Data[1] - other.m_Data[1];
+	V.m_Data[2] = m_Data[2] - other.m_Data[2];
+
+	return V;
+}
+
+Vector Vector::operator-(const Vector& other)
 {
 	Vector V;
 
@@ -36,6 +58,17 @@ Scaler Vector::DotProduct(const Vector& other)
 }
 
 Vector Vector::CrossProduct(const Vector& other)
+{
+	Vector V;
+
+	V.m_Data[0] = m_Data[1] * other.m_Data[2] - m_Data[2] * other.m_Data[1];
+	V.m_Data[1] = m_Data[2] * other.m_Data[0] - m_Data[0] * other.m_Data[2];
+	V.m_Data[2] = m_Data[0] * other.m_Data[1] - m_Data[1] * other.m_Data[0];
+
+	return V;
+}
+
+Vector Vector::operator*(const Vector& other)
 {
 	Vector V;
 

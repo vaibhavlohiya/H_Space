@@ -26,12 +26,12 @@ int main()
 
 	Vector v1(x_axis), v2(y_axis);
 
-	Vector vec_sum = v1.Add(v2); // Adding two vectors
+	Vector vec_sum = v1 + v2; // Adding two vectors
 	std::cout << "The sum of two vectors v1 and v2 is " << vec_sum << std::endl;
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
 
-	Vector vec_diff = v1.Subtract(v2); // Subtracting two vectors
+	Vector vec_diff = v1 - v2; // Subtracting two vectors
 	std::cout << "The difference b/w two vectors v1 and v2 is " << vec_diff << std::endl;
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
@@ -41,7 +41,7 @@ int main()
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << std::endl;
 
-	Vector vec_cross = v1.CrossProduct(v2); // Cross product two vectors
+	Vector vec_cross = v1 * v2; // Cross product two vectors
 	std::cout << "The difference b/w two vectors v1 and v2 is " << vec_cross << std::endl;
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
