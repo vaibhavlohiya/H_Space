@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <iostream> 
 #include <array>
 
 #include "Scaler.h"
@@ -9,9 +9,8 @@
 class Vector
 {
 public:
-	static const size_t m_Size = 4;
-	std::array<Scaler, m_Size> m_Data;
-	
+	static const size_t m_Size = 3;
+
 	// Class Constructors
 
 	Vector() = default;
@@ -38,7 +37,12 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& stream, const Vector& V_out);
 
+	virtual ~Vector() {}
+
 private:
+
+	// Class Members
+	std::array<Scaler, m_Size> m_VectorArray;
 	
 };
 

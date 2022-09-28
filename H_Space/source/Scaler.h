@@ -7,7 +7,6 @@
 class Scaler
 {
 public:
-	float m_Value = 0;
 
 	// Class Constructors
 
@@ -16,7 +15,8 @@ public:
 
 	// Class Methods
 
-	const float Data() const;
+	const int Data() const;
+
 	Scaler Addition(const Scaler& other);
 	Scaler Subtract(const Scaler& other);
 	Scaler Multiply(const Scaler& other);
@@ -30,10 +30,18 @@ public:
 	Scaler operator*(const Scaler& other);
 	Scaler operator/(const Scaler& other);
 
+	bool operator==(const Scaler& other);
+
+	Scaler operator+=(const Scaler& other);
+	Scaler operator-=(const Scaler& other);
+	Scaler operator*=(const Scaler& other);
+
 	// Class Destructor
 
-	virtual ~Scaler();
+	virtual ~Scaler() {}
 
 private:
+
+	int m_Value = 0;
 
 };

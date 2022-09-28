@@ -143,11 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="source\Matrix.h" />
     <ClInclude Include="source\Scaler.h" />
     <ClInclude Include="source\Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Matrix.cpp" />
     <ClCompile Include="source\Scaler.cpp" />
     <ClCompile Include="source\Vector.cpp" />
   </ItemGroup>
