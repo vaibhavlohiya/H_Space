@@ -1,8 +1,10 @@
+#include <iostream>
+
 #include "Scaler.h"
 
 // Class Constructors
 
-Scaler::Scaler(const float& DataPoint) : m_Value(DataPoint) {}
+Scaler::Scaler(const int& DataPoint) : m_Value(DataPoint) {}
 
 // Class Methods
 
@@ -28,23 +30,13 @@ bool Scaler::operator==(const Scaler& other)
 		return false;
 }
 
-Scaler Scaler::operator+=(const Scaler& other)
+Scaler Scaler::operator+=(const Scaler& other) { return Scaler(m_Value += other.m_Value); }
+Scaler Scaler::operator-=(const Scaler& other) { return Scaler(m_Value -= other.m_Value); }
+Scaler Scaler::operator*=(const Scaler& other) { return Scaler(m_Value *= other.m_Value); }
+
+std::ostream& operator<<(std::ostream& stream, const Scaler& S_out)
 {
-	this->m_Value += other.Data();
+	stream << S_out.Data() << "\n";
 
-	return *this;
-}
-
-Scaler Scaler::operator-=(const Scaler& other)
-{
-	this->m_Value -= other.Data();
-
-	return *this;
-}
-
-Scaler Scaler::operator*=(const Scaler& other)
-{
-	this->m_Value *= other.Data();
-
-	return *this;
+	return stream;
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream> 
 #include <array>
 
 #include "Scaler.h"
@@ -9,7 +8,7 @@
 class Vector
 {
 public:
-	static const size_t m_Size = 3;
+	static const size_t m_Size = 4;
 
 	// Class Constructors
 
@@ -46,10 +45,3 @@ private:
 	
 };
 
-inline std::ostream& operator<<(std::ostream& stream, const Vector& V_out)
-{
-	for (size_t i = 0; i < V_out.size(); i++)
-		stream << V_out[i].Data() << " ";
-
-	return stream;
-}
