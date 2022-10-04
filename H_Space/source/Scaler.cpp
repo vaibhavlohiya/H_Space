@@ -4,11 +4,11 @@
 
 // Class Constructors
 
-Scaler::Scaler(const int& DataPoint) : m_Value(DataPoint) {}
+Scaler::Scaler(const double& DataPoint) : m_Value(DataPoint) {}
 
 // Class Methods
 
-const int Scaler::Data() const { return m_Value; }
+const double Scaler::Data() const { return m_Value; }
 
 Scaler Scaler::Addition(const Scaler& other) { return Scaler(m_Value + other.m_Value); }
 Scaler Scaler::Subtract(const Scaler& other) { return Scaler(m_Value - other.m_Value); }
@@ -36,7 +36,7 @@ Scaler Scaler::operator*=(const Scaler& other) { return Scaler(m_Value *= other.
 
 std::ostream& operator<<(std::ostream& stream, const Scaler& S_out)
 {
-	stream << S_out.Data() << "\n";
+	stream << S_out.Data();
 
 	return stream;
 }

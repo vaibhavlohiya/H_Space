@@ -13,11 +13,11 @@ public:
 	// Class Constructors
 
 	Scaler() = default;
-	Scaler(const int& Data);
+	Scaler(const double& Data);
 
 	// Class Methods
 
-	const int Data() const;
+	const double Data() const;
 
 	Scaler Addition(const Scaler& other);
 	Scaler Subtract(const Scaler& other);
@@ -46,6 +46,6 @@ public:
 
 private:
 
-	int m_Value = 0;
+	double m_Value = 0;
 
 };

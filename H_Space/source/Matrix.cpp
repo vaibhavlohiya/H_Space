@@ -74,6 +74,8 @@ const size_t Matrix::GetLinearIndex(const Scaler& scaler_value) const
 		if (m_LinearArray[index].Data() == scaler_value.Data())
 			return index;
 	}
+
+	return -1;
 }
 
 Scaler* Matrix::GetLinearData() { return &m_LinearArray[0]; }

@@ -57,10 +57,14 @@ int main()
 	Scaler* m2_linear = matrix2.GetLinearData();
 
 	for (size_t i = 0; i < matrix1.GetRows() * matrix1.GetColumns(); i++)
-		std::cout << m1_linear[i] << std::endl;
+		std::cout << m1_linear[i] << " ";
+
+	std::cout << "\n";
 
 	for (size_t i = 0; i < matrix2.GetRows() * matrix2.GetColumns(); i++)
-		std::cout << m2_linear[i] << std::endl;
+		std::cout << m2_linear[i] << " ";
+
+	std::cout << "\n";
 
 	std::cout << "Matrix 1 : " << "\n" << matrix1;
 	std::cout << "Matrix 2 : " << "\n" << matrix2;
@@ -78,9 +82,14 @@ int main()
 	std::cout << "Column vector of matrix1 is " << matrix1.GetColumnVector(0) << "\n";
 	std::cout << "Column vector of prod is " << "\n" << Prod.GetColumnVector(0) << "\n";
 
-	Matrix multiply = matrix1 * matrix2;
+	Vector v7({ 1, 1, 1 }), v8({ 2, 2, 2 }), v9({ 3, 3, 3 });
 
-	std::cout << "Multiplication of matrix 1 & 2 is " << "\n" << multiply;
+	Matrix matrix3({ v7, v8, v9 }, 'R');
+	Matrix matrix4({ v9, v8, v7 }, 'R'); 
+
+	Matrix multiply = matrix3 * matrix4;
+
+	std::cout << "Multiplication of matrix 3 & 4 is " << "\n" << multiply;
 
 	std::cin.get();
 }
