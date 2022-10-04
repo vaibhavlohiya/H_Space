@@ -45,24 +45,26 @@ Scaler Vector::DotProduct(const Vector& other)
 
 Vector Vector::CrossProduct(const Vector& other)
 {
+	Vector V = {};
+
 	if (m_Size == 3)
 	{
-		this->m_VectorArray[0] = m_VectorArray[1] * other.m_VectorArray[2] - m_VectorArray[2] * other.m_VectorArray[1];
-		this->m_VectorArray[1] = m_VectorArray[2] * other.m_VectorArray[0] - m_VectorArray[0] * other.m_VectorArray[2];
-		this->m_VectorArray[2] = m_VectorArray[0] * other.m_VectorArray[1] - m_VectorArray[1] * other.m_VectorArray[0];
+		V.m_VectorArray[0] = m_VectorArray[1] * other.m_VectorArray[2] - m_VectorArray[2] * other.m_VectorArray[1];
+		V.m_VectorArray[1] = m_VectorArray[2] * other.m_VectorArray[0] - m_VectorArray[0] * other.m_VectorArray[2];
+		V.m_VectorArray[2] = m_VectorArray[0] * other.m_VectorArray[1] - m_VectorArray[1] * other.m_VectorArray[0];
 	}
 
-	return Vector(this->m_VectorArray);
+	return Vector(V.m_VectorArray);
 }
 
 // Class Operator Overloads
 
 Vector Vector::operator+(const Vector& other) { return Add(other); }
 Vector Vector::operator-(const Vector& other) { return Subtract(other); }
-Vector Vector::operator*(const Vector& other) { return CrossProduct(other); }
+Scaler Vector::operator*(const Vector& other) { return DotProduct(other); }
 
-Scaler& Vector::operator[](size_t index) { return m_VectorArray[index]; }
-const Scaler& Vector::operator[](size_t index) const { return m_VectorArray[index]; }
+Scaler& Vector::operator[](size_t& index) { return m_VectorArray[index]; }
+const Scaler& Vector::operator[](size_t& index) const { return m_VectorArray[index]; }
 
 std::ostream& operator<<(std::ostream& stream, const Vector& V_out)
 {
