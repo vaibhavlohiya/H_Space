@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+template<typename T>
 class Scaler
 {
 public:
@@ -13,12 +14,12 @@ public:
 	// Class Constructors
 
 	Scaler() = default;
-	Scaler(const double& Data);
+	Scaler(const T& Data);
 
 	// Class Methods
 
-	double Data();
-	const double Data() const;
+	T Data();
+	const T Data() const;
 
 	Scaler addition(const Scaler& other);
 	Scaler subtract(const Scaler& other);
@@ -47,6 +48,56 @@ public:
 
 private:
 
-	double m_Value = 0;
+	T m_Value = 0;
 
 };
+
+// Class Constructors
+
+template<typename T>
+Scaler<T>::Scaler(const T& DataPoint) : m_Value(DataPoint) {}
+
+// Class Methods
+
+template<typename T> T Scaler<T>::Data() { return m_Value; }
+
+template<typename T> const T Scaler<T>::Data() const { return m_Value; }
+
+template<typename T> Scaler<T> Scaler<T>::addition(const Scaler& other) { return Scaler(m_Value + other.m_Value); }
+
+template<typename T> Scaler<T> Scaler<T>::subtract(const Scaler& other) { return Scaler(m_Value - other.m_Value); }
+
+template<typename T> Scaler<T> Scaler<T>::multiply(const Scaler& other) { return Scaler(m_Value * other.m_Value); }
+
+template<typename T> Scaler<T> Scaler<T>::divide(const Scaler& other) { return Scaler(m_Value / other.m_Value); }
+
+// Class Operator Overloads
+
+template<typename T> Scaler<T> Scaler<T>::operator+(const Scaler& other) { return addition(other); }
+template<typename T> Scaler<T> Scaler<T>::operator-(const Scaler& other) { return subtract(other); }
+template<typename T> Scaler<T> Scaler<T>::operator*(const Scaler& other) { return multiply(other); }
+template<typename T> Scaler<T> Scaler<T>::operator/(const Scaler& other) { return divide(other); }
+
+template<typename T>
+bool Scaler<T>::operator==(const Scaler& other)
+{
+	if (m_Value == other.Data())
+		return true;
+	else
+		return false;
+
+	//m_Value == other.Data() ? true : false;
+}
+
+template<typename T> Scaler<T> Scaler<T>::operator+=(const Scaler& other) { return Scaler(m_Value += other.m_Value); }
+template<typename T> Scaler<T> Scaler<T>::operator-=(const Scaler& other) { return Scaler(m_Value -= other.m_Value); }
+template<typename T> Scaler<T> Scaler<T>::operator*=(const Scaler& other) { return Scaler(m_Value *= other.m_Value); }
+
+template<typename T>
+std::ostream& operator<<(std::ostream& stream, const Scaler<T>& S_out)
+{
+	stream << S_out.Data();
+
+	return stream;
+}
+

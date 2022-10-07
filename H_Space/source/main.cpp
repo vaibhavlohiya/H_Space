@@ -7,16 +7,16 @@ int main()
 {
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x- [SCALERS] -x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
 
-	Scaler x1(1), x2(2), x3(3), x4(4);
-	Scaler y1(5), y2(6), y3(7), y4(8);
-	Scaler z1(9), z2(10), z3(11), z4(12);
+	Scaler<double> x1(1), x2(2), x3(3), x4(4);
+	Scaler<double> y1(5), y2(6), y3(7), y4(8);
+	Scaler<double> z1(9), z2(10), z3(11), z4(12);
 
 	// Implicit Conversion
 
-	Scaler sum = x1 + x2;       // Add
-	Scaler diff = x1 - x2;		// Subtract 
-	Scaler prod = x1 * x2;		// Multiply
-	Scaler quot = x1 / x2;		// Divide
+	Scaler<double> sum = x1 + x2;       // Add
+	Scaler<double> diff = x1 - x2;		// Subtract 
+	Scaler<double> prod = x1 * x2;		// Multiply
+	Scaler<double> quot = x1 / x2;		// Divide
 
 	std::cout << "Sum of x1 and x2: " << sum << std::endl;
 	std::cout << "Difference b/w x1 and x2: " << diff << std::endl;
@@ -27,9 +27,9 @@ int main()
 
 	// Method 1
 
-	std::array<Scaler, 3> x_axis = { x1, x2, x3 };
-	std::array<Scaler, 3> y_axis = { y1, y2, y3 };
-	std::array<Scaler, 3> z_axis = { z1, z2, z3 };
+	std::array<Scaler<double>, 3> x_axis = { x1, x2, x3 };
+	std::array<Scaler<double>, 3> y_axis = { y1, y2, y3 };
+	std::array<Scaler<double>, 3> z_axis = { z1, z2, z3 };
 
 	Vector v1(x_axis), v2(y_axis), v3(z_axis);
 
@@ -43,7 +43,7 @@ int main()
 	Vector vec_diff = v1 - v2; // Subtracting two vectors
 	std::cout << "The difference b/w vectors v1 and v2 is " << vec_diff << std::endl;
 
-	Scaler vec_dot = v1 * v2; // Scaler Dot product of two vectors
+	Scaler<double> vec_dot = v1 * v2; // Scaler Dot product of two vectors
 	std::cout << "The dot product two vectors v1 and v2 is " << vec_dot << std::endl; // 81.97
 
 	Vector vec_cross = v1.crossProduct(v2); // Vector Cross product two vectors
@@ -55,10 +55,10 @@ int main()
 	Matrix matrix2({ v1, v2, v3 }, 'C');
 	Matrix matrixL({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
-	Scaler Ten(10);
+	Scaler<double> Ten(10);
 
-	Scaler* m1_linear = matrix1.Data();
-	Scaler* m2_linear = matrix2.Data();
+	Scaler<double>* m1_linear = matrix1.Data();
+	Scaler<double>* m2_linear = matrix2.Data();
 
 	for (size_t i = 0; i < matrix1.GetRows() * matrix1.GetColumns(); i++)
 		std::cout << m1_linear[i] << " ";
