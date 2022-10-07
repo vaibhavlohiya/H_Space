@@ -5,7 +5,7 @@
 // for class vector hence we call it a rank = 0 tensor.
 
 #include <iostream>
- 
+
 class Scaler
 {
 public:
@@ -17,12 +17,13 @@ public:
 
 	// Class Methods
 
+	double Data();
 	const double Data() const;
 
-	Scaler Addition(const Scaler& other);
-	Scaler Subtract(const Scaler& other);
-	Scaler Multiply(const Scaler& other);
-	Scaler Divide(const Scaler& other);
+	Scaler addition(const Scaler& other);
+	Scaler subtract(const Scaler& other);
+	Scaler multiply(const Scaler& other);
+	Scaler divide(const Scaler& other);
 
 
 	// Class Operator Overloads

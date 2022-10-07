@@ -1,8 +1,6 @@
 #include <iostream>
 #include <array>
 
-#include "Scaler.h"
-#include "Vector.h"
 #include "Matrix.h"
 
 int main()
@@ -27,11 +25,15 @@ int main()
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x- [VECTORS] -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x" << "\n";
 
+	// Method 1
+
 	std::array<Scaler, 3> x_axis = { x1, x2, x3 };
 	std::array<Scaler, 3> y_axis = { y1, y2, y3 };
 	std::array<Scaler, 3> z_axis = { z1, z2, z3 };
 
 	Vector v1(x_axis), v2(y_axis), v3(z_axis);
+
+	// Method 2
 
 	Vector v4({ -2, -4, -6 }), v5({ -1, -3, -5 }), v6({ -7, -9, -11 }); // implicit conversion
 
@@ -44,17 +46,19 @@ int main()
 	Scaler vec_dot = v1 * v2; // Scaler Dot product of two vectors
 	std::cout << "The dot product two vectors v1 and v2 is " << vec_dot << std::endl; // 81.97
 
-	Vector vec_cross = v1.CrossProduct(v2); // Vector Cross product two vectors
+	Vector vec_cross = v1.crossProduct(v2); // Vector Cross product two vectors
 	std::cout << "The cross product b/w two vectors v1 and v2 is " << vec_cross << std::endl; // -41.19, 210.006, -69.992
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x- [MATRIX] -x-x-x-x-x-x-x-x-x-x-x-x-x" << std::endl;
 
 	Matrix matrix1({ v1, v2, v3 }, 'R');
 	Matrix matrix2({ v1, v2, v3 }, 'C');
+	Matrix matrixL({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
 	Scaler Ten(10);
 
-	Scaler* m1_linear = matrix1.GetLinearData();
-	Scaler* m2_linear = matrix2.GetLinearData();
+	Scaler* m1_linear = matrix1.Data();
+	Scaler* m2_linear = matrix2.Data();
 
 	for (size_t i = 0; i < matrix1.GetRows() * matrix1.GetColumns(); i++)
 		std::cout << m1_linear[i] << " ";
@@ -85,11 +89,16 @@ int main()
 	Vector v7({ 1, 1, 1 }), v8({ 2, 2, 2 }), v9({ 3, 3, 3 });
 
 	Matrix matrix3({ v7, v8, v9 }, 'R');
-	Matrix matrix4({ v9, v8, v7 }, 'R'); 
+	Matrix matrix4({ v9, v8, v7 }, 'R');
 
 	Matrix multiply = matrix3 * matrix4;
 
 	std::cout << "Multiplication of matrix 3 & 4 is " << "\n" << multiply;
+
+	std::cout << "\n";
+
+	std::cout << "First row of matrixL: " << matrixL[0] << "\n";
+	std::cout << "First element of matrixL: " << matrixL[0][0] << "\n";
 
 	std::cin.get();
 }

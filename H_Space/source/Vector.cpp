@@ -11,9 +11,12 @@ Vector::Vector(const std::array<Scaler, m_Size>& Components)
 
 // Class Methods 
 
+Scaler* Vector::Data() { return &m_VectorArray[0]; }
+const Scaler* Vector::Data() const { return &m_VectorArray[0]; }
+
 const size_t Vector::size() const { return m_Size; }
 
-Vector Vector::Add(const Vector& other)
+Vector Vector::add(const Vector& other)
 {
 	Vector V = {};
 
@@ -23,7 +26,7 @@ Vector Vector::Add(const Vector& other)
 	return Vector(V.m_VectorArray);
 }
 
-Vector Vector::Subtract(const Vector& other)
+Vector Vector::subtract(const Vector& other)
 {
 	Vector V = {};
 
@@ -33,17 +36,17 @@ Vector Vector::Subtract(const Vector& other)
 	return Vector(V.m_VectorArray);
 }
 
-Scaler Vector::DotProduct(const Vector& other)
+Scaler Vector::dotProduct(const Vector& other)
 {
 	Scaler S = {};
 
 	for (size_t i = 0; i < m_Size; i++)
-		S += m_VectorArray[i]*other.m_VectorArray[i];
+		S += m_VectorArray[i] * other.m_VectorArray[i];
 
 	return Scaler(S.Data());
 }
 
-Vector Vector::CrossProduct(const Vector& other)
+Vector Vector::crossProduct(const Vector& other)
 {
 	Vector V = {};
 
@@ -57,14 +60,48 @@ Vector Vector::CrossProduct(const Vector& other)
 	return Vector(V.m_VectorArray);
 }
 
+Vector Vector::addScaler(const Scaler& other)
+{
+	Vector V = {};
+
+	for (size_t i = 0; i < m_Size; i++)
+		V.m_VectorArray[i] = m_VectorArray[i] + other;
+
+	return Vector(V.m_VectorArray);
+}
+
+Vector Vector::subtractScaler(const Scaler& other)
+{
+	Vector V = {};
+
+	for (size_t i = 0; i < m_Size; i++)
+		V.m_VectorArray[i] = m_VectorArray[i] - other;
+
+	return Vector(V.m_VectorArray);
+}
+
+Vector Vector::prodScaler(const Scaler& other)
+{
+	Vector V = {};
+
+	for (size_t i = 0; i < m_Size; i++)
+		V.m_VectorArray[i] = m_VectorArray[i] * other;
+
+	return Vector(V.m_VectorArray);
+}
+
 // Class Operator Overloads
 
-Vector Vector::operator+(const Vector& other) { return Add(other); }
-Vector Vector::operator-(const Vector& other) { return Subtract(other); }
-Scaler Vector::operator*(const Vector& other) { return DotProduct(other); }
+Vector Vector::operator+(const Vector& other) { return add(other); }
+Vector Vector::operator-(const Vector& other) { return subtract(other); }
+Scaler Vector::operator*(const Vector& other) { return dotProduct(other); }
 
-Scaler& Vector::operator[](size_t& index) { return m_VectorArray[index]; }
-const Scaler& Vector::operator[](size_t& index) const { return m_VectorArray[index]; }
+Vector Vector::operator+(const Scaler& other) { return addScaler(other); }
+Vector Vector::operator-(const Scaler& other) { return subtractScaler(other); }
+Vector Vector::operator*(const Scaler& other) { return prodScaler(other); }
+
+Scaler& Vector::operator[](size_t index) { return m_VectorArray[index]; }
+const Scaler& Vector::operator[](size_t index) const { return m_VectorArray[index]; }
 
 std::ostream& operator<<(std::ostream& stream, const Vector& V_out)
 {

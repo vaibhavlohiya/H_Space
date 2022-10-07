@@ -13,24 +13,36 @@ public:
 	// Class Constructors
 
 	Vector() = default;
-	Vector(const std::array<Scaler, m_Size>& Components); 
+	Vector(const std::array<Scaler, m_Size>& Components);
 
 	// Class Methods
 
+	Scaler* Data();
+	const Scaler* Data() const;
+
 	const size_t size() const;
-	Vector Add(const Vector& other);
-	Vector Subtract(const Vector& other);
-	Scaler DotProduct(const Vector& other);
-	Vector CrossProduct(const Vector& other);
+
+	Vector add(const Vector& other);
+	Vector subtract(const Vector& other);
+	Scaler dotProduct(const Vector& other);
+	Vector crossProduct(const Vector& other);
+
+	Vector addScaler(const Scaler& other);
+	Vector subtractScaler(const Scaler& other);
+	Vector prodScaler(const Scaler& other);
 
 	// Class Operator Overloads
 
 	Vector operator+(const Vector& other);  // Addition operator 
 	Vector operator-(const Vector& other);  // Subtraction operator
-	Scaler operator*(const Vector& other);  // Multiplication operator for cross product
+	Scaler operator*(const Vector& other);  // Multiplication operator for dot product
 
-	Scaler& operator[](size_t& index);
-	const Scaler& operator[](size_t& index) const;
+	Vector operator+(const Scaler& other);  // Addition operator for scaler
+	Vector operator-(const Scaler& other);	// Subtraction operator for scaler
+	Vector operator*(const Scaler& other);	// Multiplication operator for scaler
+
+	Scaler& operator[](size_t index);
+	const Scaler& operator[](size_t index) const;
 
 	// Class Friend functions
 
@@ -43,7 +55,7 @@ public:
 private:
 
 	// Class Members
-	std::array<Scaler, m_Size> m_VectorArray;
-	
-};
 
+	std::array<Scaler, m_Size> m_VectorArray;
+
+};

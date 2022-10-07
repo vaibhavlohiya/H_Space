@@ -6,24 +6,24 @@
 
 // Class Constructors
 
-Matrix::Matrix(const std::array<Scaler, n_Rows * m_Columns>& linear_Scalers)
+Matrix::Matrix(const std::array<Scaler, n_Rows* m_Columns>& linear_Scalers)
 	: m_LinearArray(linear_Scalers)
 {
 	for (size_t i = 0; i < n_Rows; i++)
 	{
 		for (size_t j = 0; j < m_Columns; j++)
 		{
-			m_RowVectorArray[i][j] = linear_Scalers[(i * m_Columns) + j]; 
+			m_RowVectorArray[i][j] = linear_Scalers[GetLinearIndex(i, j)];
 
-			m_ColumnVectorArray[j][i] = linear_Scalers[(i * m_Columns) + j];  // ColumnArray is just a transpose of RowArray.
+			m_ColumnVectorArray[j][i] = linear_Scalers[GetLinearIndex(i, j)];  // ColumnArray is just a transpose of RowArray.
 		}
 	}
 
 }
 
-Matrix::Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const char& flag) 
+Matrix::Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const char& flag)
 {
-	if (flag == 'C')
+	if (flag == 'C' || flag == 'c')
 	{
 		m_ColumnVectorArray = row_or_column_Vectors;
 
@@ -33,12 +33,12 @@ Matrix::Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const ch
 			{
 				m_RowVectorArray[i][j] = row_or_column_Vectors[j][i];
 
-				m_LinearArray[(i * m_Columns) + j] = row_or_column_Vectors[j][i];
+				m_LinearArray[GetLinearIndex(i, j)] = row_or_column_Vectors[j][i];
 			}
 		}
 	}
 
-	else if (flag == 'R')
+	else if (flag == 'R' || flag == 'r')
 	{
 		m_RowVectorArray = row_or_column_Vectors;
 
@@ -48,7 +48,7 @@ Matrix::Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const ch
 			{
 				m_ColumnVectorArray[i][j] = row_or_column_Vectors[j][i];
 
-				m_LinearArray[(i * m_Columns) + j] = row_or_column_Vectors[i][j];
+				m_LinearArray[GetLinearIndex(i, j)] = row_or_column_Vectors[i][j];
 			}
 		}
 	}
@@ -56,9 +56,9 @@ Matrix::Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const ch
 }
 
 Matrix::Matrix(const Matrix& matrix)
-	: m_LinearArray(matrix.m_LinearArray), 
-	  m_RowVectorArray(matrix.m_RowVectorArray), 
-	  m_ColumnVectorArray(matrix.m_ColumnVectorArray)
+	: m_LinearArray(matrix.m_LinearArray),
+	m_RowVectorArray(matrix.m_RowVectorArray),
+	m_ColumnVectorArray(matrix.m_ColumnVectorArray)
 {}
 
 // Class Methods
@@ -78,7 +78,8 @@ const size_t Matrix::GetLinearIndex(const Scaler& scaler_value) const
 	return -1;
 }
 
-Scaler* Matrix::GetLinearData() { return &m_LinearArray[0]; }
+Scaler* Matrix::Data() { return &m_LinearArray[0]; }
+const Scaler* Matrix::Data() const { return &m_LinearArray[0]; }
 
 const Vector Matrix::GetRowVector(const size_t& vector_index) const
 {
@@ -92,13 +93,13 @@ const Vector Matrix::GetRowVector(const size_t& vector_index) const
 	catch (size_t& index)
 	{
 		std::cout << "[ERROR]: The given index " << index << " is out of bounds" << std::endl;
-		
+
 		return this->m_ColumnVectorArray[0];
 	}
 }
 
 
-const Vector Matrix::GetColumnVector(const size_t& vector_index) const 
+const Vector Matrix::GetColumnVector(const size_t& vector_index) const
 {
 	try
 	{
@@ -109,7 +110,7 @@ const Vector Matrix::GetColumnVector(const size_t& vector_index) const
 	}
 	catch (size_t& index)
 	{
-		std::cout << "[ERROR]: The given index " << index <<" is out of bounds" << std::endl;
+		std::cout << "[ERROR]: The given index " << index << " is out of bounds" << std::endl;
 
 		return this->m_ColumnVectorArray[0];
 	}
@@ -229,8 +230,8 @@ Matrix Matrix::operator-(const Scaler& other) { return sub_Scaler(other); }
 Matrix Matrix::operator*(const Matrix& other) { return prod_Matrix(other); }
 Matrix Matrix::operator*(const Scaler& other) { return prod_Scaler(other); }
 
-Vector& Matrix::operator[](size_t& index) { return m_ColumnVectorArray[index]; }
-const Vector& Matrix::operator[](size_t& index) const { return m_ColumnVectorArray[index]; }
+Vector& Matrix::operator[](size_t index) { return m_RowVectorArray[index]; }
+const Vector& Matrix::operator[](size_t index) const { return m_RowVectorArray[index]; }
 
 std::ostream& operator<<(std::ostream& stream, const Matrix& M_out)
 {
@@ -250,7 +251,7 @@ void Matrix::ExpCheck(const size_t& index, const size_t& limit)
 	catch (size_t& index)
 	{
 		std::cout << "[ERROR]: The index " << index << " is out of bounds" << std::endl;
- 	}
+	}
 }
 
 const size_t Matrix::GetLinearIndex(const size_t& row_index, const size_t& column_index) const

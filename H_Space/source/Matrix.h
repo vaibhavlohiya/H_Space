@@ -16,7 +16,7 @@ public:
 	// Class Constructors
 
 	Matrix() = default;
-	Matrix(const std::array<Scaler, n_Rows * m_Columns>& linear_Scalers);	                 // A constructor which takes linear array as an input.
+	Matrix(const std::array<Scaler, n_Rows* m_Columns>& linear_Scalers);	                 // A constructor which takes linear array as an input.
 	Matrix(const std::array<Vector, n_Rows>& row_or_column_Vectors, const char& flag);		// A constructor which takes an array of vectors as an input.
 	Matrix(const Matrix& matrix);											               // A constructor which takes in another matrix as an input.
 
@@ -25,9 +25,10 @@ public:
 	const size_t GetRows() const;
 	const size_t GetColumns() const;
 	const size_t GetLimit() const;
-
 	const size_t GetLinearIndex(const Scaler& scaler_value) const;
-	Scaler* GetLinearData();          // This would return a scaler pointer to the first element of the linear array.
+
+	Scaler* Data();          // This would return a scaler pointer to the first element of the linear array.
+	const Scaler* Data() const;
 
 	const Vector GetRowVector(const size_t& vector_index) const;
 	const Vector GetColumnVector(const size_t& vector_index) const;
@@ -55,9 +56,9 @@ public:
 	Matrix operator*(const Matrix& other);  // Multiplication between two Matrices 
 	Matrix operator*(const Scaler& other);	// Multiplication with a Scaler
 
-	Vector& operator[](size_t& index);             // These operators will return column vectors of given index by default.
-	const Vector& operator[](size_t& index) const;
-	
+	Vector& operator[](size_t index);             // These operators will return row vectors of given index by default.
+	const Vector& operator[](size_t index) const;
+
 
 	// Class Friend function
 
@@ -73,7 +74,7 @@ private:
 
 	std::array<Vector, n_Rows> m_RowVectorArray;			// An array to store row vectors of the Matrix
 	std::array<Vector, m_Columns> m_ColumnVectorArray;		// An array to store column vectors of the Matrix
-	std::array<Scaler, n_Rows * m_Columns> m_LinearArray;	// An array to store all the elements of the Matrix linearly.
+	std::array<Scaler, n_Rows* m_Columns> m_LinearArray;	// An array to store all the elements of the Matrix linearly.
 
 	// Private Member function
 
