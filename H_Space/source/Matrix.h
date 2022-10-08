@@ -56,9 +56,8 @@ public:
 	Matrix operator*(const Matrix& other);  // Multiplication between two Matrices 
 	Matrix operator*(const Scaler<T>& other);	// Multiplication with a Scaler
 
-	Vector<T,N>& operator[](size_t index);             // These operators will return row vectors of given index by default.
-	const Vector<T,N>& operator[](size_t index) const;
-
+	Vector<T,M>& operator[](size_t index);              // These operators will return row vectors of given index by default.
+	const Vector<T,M>& operator[](size_t index) const;
 
 	// Class Friend function
 
@@ -78,13 +77,12 @@ private:
 
 	// Private Member variables
 
-	std::array<Vector<T,N>, n_Rows> m_RowVectorArray = {};			// An array to store row vectors of the Matrix
+	std::array<Vector<T,M>, n_Rows> m_RowVectorArray = {};			// An array to store row vectors of the Matrix
 	std::array<Vector<T,N>, m_Columns> m_ColumnVectorArray = {};		// An array to store column vectors of the Matrix
 	std::array<Scaler<T>, n_Rows* m_Columns> m_LinearArray = {};	// An array to store all the elements of the Matrix linearly.
 
-	// Private Member function
+	//Private Member function
 
-	void ExpCheck(const size_t index, const size_t limit);
 	const size_t GetLinearIndex(const size_t& row_index, const size_t& column_index) const;
 
 };
@@ -341,10 +339,10 @@ template<typename T, size_t N, size_t M>
 Matrix<T,N,M> Matrix<T,N,M>::operator*(const Scaler<T>& other) { return prod_Scaler(other); }
 
 template<typename T, size_t N, size_t M>
-Vector<T,N>& Matrix<T,N,M>::operator[](size_t index) { return m_RowVectorArray[index]; }
+Vector<T,M>& Matrix<T,N,M>::operator[](size_t index) { return m_RowVectorArray[index]; }
 
 template<typename T, size_t N, size_t M>
-const Vector<T,N>& Matrix<T,N,M>::operator[](size_t index) const { return m_RowVectorArray[index]; }
+const Vector<T,M>& Matrix<T,N,M>::operator[](size_t index) const { return m_RowVectorArray[index]; }
 
 // Private member functions
 
