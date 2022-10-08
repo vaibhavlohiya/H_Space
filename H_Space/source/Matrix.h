@@ -62,7 +62,7 @@ public:
 
 	// Class Friend function
 
-	friend std::ostream& operator<<(std::ostream& stream, const Matrix& M_out)
+	friend std::ostream& operator<<(std::ostream& stream, const Matrix<T,N,M>& M_out)
 	{
 		for (size_t i = 0; i < M_out.n_Rows; i++)
 			stream << M_out.m_RowVectorArray.at(i) << "\n";
@@ -78,9 +78,9 @@ private:
 
 	// Private Member variables
 
-	std::array<Vector<T,N>, n_Rows> m_RowVectorArray;			// An array to store row vectors of the Matrix
-	std::array<Vector<T,M>, m_Columns> m_ColumnVectorArray;		// An array to store column vectors of the Matrix
-	std::array<Scaler<T>, n_Rows* m_Columns> m_LinearArray;	// An array to store all the elements of the Matrix linearly.
+	std::array<Vector<T,N>, n_Rows> m_RowVectorArray = {};			// An array to store row vectors of the Matrix
+	std::array<Vector<T,N>, m_Columns> m_ColumnVectorArray = {};		// An array to store column vectors of the Matrix
+	std::array<Scaler<T>, n_Rows* m_Columns> m_LinearArray = {};	// An array to store all the elements of the Matrix linearly.
 
 	// Private Member function
 

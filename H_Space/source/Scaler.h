@@ -53,7 +53,7 @@ public:
 
 private:
 
-	T m_Value = 0;
+	T m_Value = {};
 
 };
 

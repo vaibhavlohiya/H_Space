@@ -100,5 +100,13 @@ int main()
 	std::cout << "First row of matrixL: " << matrixL[0] << "\n";
 	std::cout << "First element of matrixL: " << matrixL[0][0] << "\n";
 
+	Scaler<std::string> h("hello"), m("my name is"), v("Vaibhav");
+
+	//Matrix<std::string, 1, 3> mat_str({h, m, v});
+	Matrix<double, 2, 3> mat_basic({ 1, 2, 3, 4, 5, 6});
+	//Matrix<double, 3, 3> matrixL({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
+	std::cout << "Matrix of Strings is given below: " << "\n" << mat_basic;
+
 	std::cin.get();
 }
