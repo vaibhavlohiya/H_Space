@@ -31,29 +31,29 @@ int main()
 	std::array<Scaler<double>, 3> y_axis = { y1, y2, y3 };
 	std::array<Scaler<double>, 3> z_axis = { z1, z2, z3 };
 
-	Vector v1(x_axis), v2(y_axis), v3(z_axis);
+	Vector<double, 3>  v1(x_axis), v2(y_axis), v3(z_axis);
 
 	// Method 2
 
-	Vector v4({ -2, -4, -6 }), v5({ -1, -3, -5 }), v6({ -7, -9, -11 }); // implicit conversion
+	Vector<double, 3> v4({ -2, -4, -6 }), v5({ -1, -3, -5 }), v6({ -7, -9, -11 }); // implicit conversion
 
-	Vector vec_sum = v4 + v5; // Adding two vectors
+	Vector<double, 3> vec_sum = v4 + v5; // Adding two vectors
 	std::cout << "The sum of two vectors v4 and v5 is " << vec_sum << std::endl;
 
-	Vector vec_diff = v1 - v2; // Subtracting two vectors
+	Vector<double, 3> vec_diff = v1 - v2; // Subtracting two vectors
 	std::cout << "The difference b/w vectors v1 and v2 is " << vec_diff << std::endl;
 
 	Scaler<double> vec_dot = v1 * v2; // Scaler Dot product of two vectors
 	std::cout << "The dot product two vectors v1 and v2 is " << vec_dot << std::endl; // 81.97
 
-	Vector vec_cross = v1.crossProduct(v2); // Vector Cross product two vectors
+	Vector<double, 3> vec_cross = v1.crossProduct(v2); // Vector Cross product two vectors
 	std::cout << "The cross product b/w two vectors v1 and v2 is " << vec_cross << std::endl; // -41.19, 210.006, -69.992
 
 	std::cout << "x-x-x-x-x-x-x-x-x-x-x-x-x- [MATRIX] -x-x-x-x-x-x-x-x-x-x-x-x-x" << std::endl;
 
-	Matrix matrix1({ v1, v2, v3 }, 'R');
-	Matrix matrix2({ v1, v2, v3 }, 'C');
-	Matrix matrixL({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+	Matrix<double, 3, 3> matrix1({ v1, v2, v3 }, 'R');
+	Matrix<double, 3, 3> matrix2({ v1, v2, v3 }, 'C');
+	Matrix<double, 3, 3> matrixL({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
 	Scaler<double> Ten(10);
 
@@ -80,18 +80,18 @@ int main()
 
 	std::cout << "The matrix1 after multiplying with a scaler: " << "\n" << matrix1.prod_Scaler(Ten);
 
-	Matrix Prod = matrix1 + Ten;
+	Matrix<double, 3, 3> Prod = matrix1 + Ten;
 
 	std::cout << "The prod array is " << "\n" << Prod;
 	std::cout << "Column vector of matrix1 is " << matrix1.GetColumnVector(0) << "\n";
 	std::cout << "Column vector of prod is " << "\n" << Prod.GetColumnVector(0) << "\n";
 
-	Vector v7({ 1, 1, 1 }), v8({ 2, 2, 2 }), v9({ 3, 3, 3 });
+	Vector<double, 3> v7({ 1, 1, 1 }), v8({ 2, 2, 2 }), v9({ 3, 3, 3 });
 
-	Matrix matrix3({ v7, v8, v9 }, 'R');
-	Matrix matrix4({ v9, v8, v7 }, 'R');
+	Matrix<double, 3, 3> matrix3({ v7, v8, v9 }, 'R');
+	Matrix<double, 3, 3> matrix4({ v9, v8, v7 }, 'R');
 
-	Matrix multiply = matrix3 * matrix4;
+	Matrix<double, 3, 3> multiply = matrix3 * matrix4;
 
 	std::cout << "Multiplication of matrix 3 & 4 is " << "\n" << multiply;
 
