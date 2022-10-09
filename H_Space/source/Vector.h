@@ -70,19 +70,19 @@ private:
 // Class Constructors
 
 template<typename T, size_t N>
-Vector<T,N>::Vector(const std::array<Scaler<T>, m_Size>& Components)
+Vector<T, N>::Vector(const std::array<Scaler<T>, m_Size>& Components)
 	: m_VectorArray(Components)
 {}
 
 // Class Methods 
 
-template<typename T, size_t N> Scaler<T>* Vector<T,N>::Data() { return &m_VectorArray[0]; }
-template<typename T, size_t N> const Scaler<T>* Vector<T,N>::Data() const { return &m_VectorArray[0]; }
+template<typename T, size_t N> Scaler<T>* Vector<T, N>::Data() { return &m_VectorArray[0]; }
+template<typename T, size_t N> const Scaler<T>* Vector<T, N>::Data() const { return &m_VectorArray[0]; }
 
-template<typename T, size_t N> const size_t Vector<T,N>::size() const { return m_Size; }
+template<typename T, size_t N> const size_t Vector<T, N>::size() const { return m_Size; }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::add(const Vector& other)
+Vector<T, N> Vector<T, N>::add(const Vector& other)
 {
 	Vector vector = {};
 
@@ -93,7 +93,7 @@ Vector<T,N> Vector<T,N>::add(const Vector& other)
 }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::subtract(const Vector& other)
+Vector<T, N> Vector<T, N>::subtract(const Vector& other)
 {
 	Vector vector = {};
 
@@ -104,7 +104,7 @@ Vector<T,N> Vector<T,N>::subtract(const Vector& other)
 }
 
 template<typename T, size_t N>
-Scaler<T> Vector<T,N>::dotProduct(const Vector& other)
+Scaler<T> Vector<T, N>::dotProduct(const Vector& other)
 {
 	Scaler<T> scaler = {};
 
@@ -115,7 +115,7 @@ Scaler<T> Vector<T,N>::dotProduct(const Vector& other)
 }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::crossProduct(const Vector& other)
+Vector<T, N> Vector<T, N>::crossProduct(const Vector& other)
 {
 	Vector vector = {};
 
@@ -130,7 +130,7 @@ Vector<T,N> Vector<T,N>::crossProduct(const Vector& other)
 }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::addScaler(const Scaler<T>& other)
+Vector<T, N> Vector<T, N>::addScaler(const Scaler<T>& other)
 {
 	Vector vector = {};
 
@@ -141,7 +141,7 @@ Vector<T,N> Vector<T,N>::addScaler(const Scaler<T>& other)
 }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::subtractScaler(const Scaler<T>& other)
+Vector<T, N> Vector<T, N>::subtractScaler(const Scaler<T>& other)
 {
 	Vector vector = {};
 
@@ -152,7 +152,7 @@ Vector<T,N> Vector<T,N>::subtractScaler(const Scaler<T>& other)
 }
 
 template<typename T, size_t N>
-Vector<T,N> Vector<T,N>::prodScaler(const Scaler<T>& other)
+Vector<T, N> Vector<T, N>::prodScaler(const Scaler<T>& other)
 {
 	Vector vector = {};
 
@@ -164,16 +164,16 @@ Vector<T,N> Vector<T,N>::prodScaler(const Scaler<T>& other)
 
 // Class Operator Overloads
 
-template<typename T, size_t N> Vector<T,N> Vector<T,N>::operator+(const Vector& other) { return add(other); }
-template<typename T, size_t N> Vector<T,N> Vector<T,N>::operator-(const Vector& other) { return subtract(other); }
-template<typename T, size_t N> Scaler<T> Vector<T,N>::operator*(const Vector& other) { return dotProduct(other); }
+template<typename T, size_t N> Vector<T, N> Vector<T, N>::operator+(const Vector& other) { return add(other); }
+template<typename T, size_t N> Vector<T, N> Vector<T, N>::operator-(const Vector& other) { return subtract(other); }
+template<typename T, size_t N> Scaler<T> Vector<T, N>::operator*(const Vector& other) { return dotProduct(other); }
 
-template<typename T, size_t N> Vector<T,N> Vector<T,N>::operator+(const Scaler<T>& other) { return addScaler(other); }
-template<typename T, size_t N> Vector<T,N> Vector<T,N>::operator-(const Scaler<T>& other) { return subtractScaler(other); }
-template<typename T, size_t N> Vector<T,N> Vector<T,N>::operator*(const Scaler<T>& other) { return prodScaler(other); }
+template<typename T, size_t N> Vector<T, N> Vector<T, N>::operator+(const Scaler<T>& other) { return addScaler(other); }
+template<typename T, size_t N> Vector<T, N> Vector<T, N>::operator-(const Scaler<T>& other) { return subtractScaler(other); }
+template<typename T, size_t N> Vector<T, N> Vector<T, N>::operator*(const Scaler<T>& other) { return prodScaler(other); }
 
-template<typename T, size_t N> Scaler<T>& Vector<T,N>::operator[](size_t index) { return m_VectorArray[index]; }
-template<typename T, size_t N> const Scaler<T>& Vector<T,N>::operator[](size_t index) const { return m_VectorArray[index]; }
+template<typename T, size_t N> Scaler<T>& Vector<T, N>::operator[](size_t index) { return m_VectorArray[index]; }
+template<typename T, size_t N> const Scaler<T>& Vector<T, N>::operator[](size_t index) const { return m_VectorArray[index]; }
 
 
 

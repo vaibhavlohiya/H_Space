@@ -42,7 +42,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& stream, const Scaler& S_out)
 	{
-		stream << S_out.Data();
+		stream << S_out.Data() << "\n";
 
 		return stream;
 	};
