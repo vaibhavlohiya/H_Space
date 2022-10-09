@@ -8,15 +8,19 @@ class Matrix
 {
 public:
 
-	// Class Members
+	// Class Member variables
 
-	static const size_t n_Rows = N;			// Number of rows for a matrix (now fixed, will change it by using templates)
+	static const size_t n_Rows = N;			// Number of rows for a matrix 
 	static const size_t m_Columns = M;		// Number of columns for a matrix.
+
+	std::array<Vector<T, M>, n_Rows> m_RowVectorArray = {};			// An array to store row vectors of the Matrix
+	std::array<Vector<T, N>, m_Columns> m_ColumnVectorArray = {};		// An array to store column vectors of the Matrix
+	std::array<Scaler<T>, n_Rows* m_Columns> m_LinearArray = {};	// An array to store all the elements of the Matrix linearly.
 
 	// Class Constructors
 
 	Matrix() = default;
-	Matrix(const std::array<Scaler<T>, n_Rows* m_Columns>& linear_Scalers);	                 // A constructor which takes linear array as an input.
+	Matrix(const std::array<Scaler<T>, n_Rows * m_Columns>& linear_Scalers);	                 // A constructor which takes linear array as an input.
 	Matrix(const std::array<Vector<T,N>, n_Rows>& row_or_column_Vectors, const char& flag);		// A constructor which takes an array of vectors as an input.
 	Matrix(const Matrix& matrix);											               // A constructor which takes in another matrix as an input.
 
@@ -30,10 +34,10 @@ public:
 	Scaler<T>* Data();          // This would return a scaler pointer to the first element of the linear array.
 	const Scaler<T>* Data() const;
 
-	const Vector<T,N> GetRowVector(const size_t& vector_index) const;
-	const Vector<T,M> GetColumnVector(const size_t& vector_index) const;
+	Vector<T,M> GetRowVector(const size_t& vector_index) const;
+	Vector<T,N> GetColumnVector(const size_t& vector_index) const;
 
-	const Scaler<T> GetScaler(const size_t& row_index, const size_t& column_index) const;
+	Scaler<T> GetScaler(const size_t& row_index, const size_t& column_index) const;
 
 	Matrix Transpose();
 	Matrix add_Matrix(const Matrix& other);
@@ -42,7 +46,9 @@ public:
 	Matrix sub_Matrix(const Matrix& other);
 	Matrix sub_Scaler(const Scaler<T>& other);
 
-	Matrix prod_Matrix(const Matrix& other);
+	template<size_t V>
+	Matrix<T,N,V> prod_Matrix(const Matrix<T,M,V>& other);
+
 	Matrix prod_Scaler(const Scaler<T>& other);
 
 	// Class Operator Overloads
@@ -53,7 +59,10 @@ public:
 	Matrix operator-(const Matrix& other);	// Subtraction with another Matrix
 	Matrix operator-(const Scaler<T>& other);	// Subtraction with a Scaler
 
-	Matrix operator*(const Matrix& other);  // Multiplication between two Matrices 
+	template<size_t V>
+	Matrix<T,N,V> operator*(const Matrix<T,M,V>& other); // Multiplication between two Matrices 
+
+	
 	Matrix operator*(const Scaler<T>& other);	// Multiplication with a Scaler
 
 	Vector<T,M>& operator[](size_t index);              // These operators will return row vectors of given index by default.
@@ -74,12 +83,6 @@ public:
 	virtual ~Matrix() {}
 
 private:
-
-	// Private Member variables
-
-	std::array<Vector<T,M>, n_Rows> m_RowVectorArray = {};			// An array to store row vectors of the Matrix
-	std::array<Vector<T,N>, m_Columns> m_ColumnVectorArray = {};		// An array to store column vectors of the Matrix
-	std::array<Scaler<T>, n_Rows* m_Columns> m_LinearArray = {};	// An array to store all the elements of the Matrix linearly.
 
 	//Private Member function
 
@@ -171,11 +174,11 @@ template<typename T, size_t N, size_t M> Scaler<T>* Matrix<T,N,M>::Data() { retu
 template<typename T, size_t N, size_t M> const Scaler<T>* Matrix<T,N,M>::Data() const { return &m_LinearArray[0]; }
 
 template<typename T, size_t N, size_t M>
-const Vector<T,N> Matrix<T,N,M>::GetRowVector(const size_t& vector_index) const
+Vector<T,M> Matrix<T,N,M>::GetRowVector(const size_t& vector_index) const
 {
 	try
 	{
-		if (vector_index >= n_Rows || vector_index < 0)
+		if (vector_index >= N || vector_index < 0)
 			throw vector_index;
 		else
 			return m_RowVectorArray[vector_index];
@@ -184,31 +187,35 @@ const Vector<T,N> Matrix<T,N,M>::GetRowVector(const size_t& vector_index) const
 	{
 		std::cout << "[ERROR]: The given index " << index << " is out of bounds" << std::endl;
 
-		return this->m_ColumnVectorArray[0];
+		return this->m_RowVectorArray[0];
 	}
+
+	//return m_RowVectorArray[vector_index];
 }
 
 
 template<typename T, size_t N, size_t M>
-const Vector<T,M> Matrix<T,N,M>::GetColumnVector(const size_t& vector_index) const
+Vector<T,N> Matrix<T,N,M>::GetColumnVector(const size_t& vector_index) const
 {
 	try
 	{
-		if (vector_index >= m_Columns || vector_index < 0)
+		if (vector_index >= M || vector_index < 0)
 			throw vector_index;
 		else
-			return m_ColumnVectorArray[vector_index];
+			return m_ColumnVectorArray[vector_index]; 
 	}
 	catch (size_t& index)
 	{
-		std::cout << "[ERROR]: The given index " << index << " is out of bounds" << std::endl;
+		std::cout << "[ERROR]: The given index " << index << " is out of bounds" << std::endl;	
 
 		return this->m_ColumnVectorArray[0];
 	}
+
+	//return m_ColumnVectorArray[vector_index];
 }
 
 template<typename T, size_t N, size_t M>
-const Scaler<T> Matrix<T,N,M>::GetScaler(const size_t& row_index, const size_t& column_index) const
+Scaler<T> Matrix<T,N,M>::GetScaler(const size_t& row_index, const size_t& column_index) const
 {
 	try
 	{
@@ -288,34 +295,21 @@ Matrix<T,N,M> Matrix<T,N,M>::prod_Scaler(const Scaler<T>& other)
 	return Matrix(matrix.m_LinearArray);
 }
 
+
 template<typename T, size_t N, size_t M>
-Matrix<T,N,M> Matrix<T,N,M>::prod_Matrix(const Matrix& other)
+template<size_t V>
+Matrix<T,N,V> Matrix<T,N,M>::prod_Matrix(const Matrix<T,M,V>& other)
 {
-	Matrix matrix = {};
+	Matrix<T,N,V> matrix = {};
 
 	// To check if Matrix Multiplication is possible or not
 
-	try
-	{
-		if (m_Columns != other.n_Rows)
-			throw matrix;
-		else
-		{
-			for (size_t i = 0; i < n_Rows; i++)
-			{
-				for (size_t j = 0; j < other.m_Columns; j++)
-					matrix.m_LinearArray[(i * other.m_Columns) + j] = m_RowVectorArray[i] * other.m_ColumnVectorArray[j];
-			}
+	for (size_t i = 0; i < N; i++)
+		for (size_t j = 0; j < V; j++)
+			matrix.m_LinearArray[(i * N) + j] = m_RowVectorArray[i] * other.m_ColumnVectorArray[j];
 
-			return Matrix(matrix.m_LinearArray);
-		}
-	}
 
-	catch (Matrix& m)
-	{
-		std::cout << "The matrix multiplication is not possible as the dimesions are not compatible" << std::endl;
-		return m;
-	}
+	return Matrix<T,N,V>(matrix.m_LinearArray);
 }
 
 // Class Operator Overloads
@@ -333,7 +327,8 @@ template<typename T, size_t N, size_t M>
 Matrix<T,N,M> Matrix<T,N,M>::operator-(const Scaler<T>& other) { return sub_Scaler(other); }
 
 template<typename T, size_t N, size_t M>
-Matrix<T,N,M> Matrix<T,N,M>::operator*(const Matrix& other) { return prod_Matrix(other); }
+template<size_t V>
+Matrix<T,N,V> Matrix<T,N,M>::operator*(const Matrix<T,M,V>& other) { return prod_Matrix(other); }
 
 template<typename T, size_t N, size_t M>
 Matrix<T,N,M> Matrix<T,N,M>::operator*(const Scaler<T>& other) { return prod_Scaler(other); }

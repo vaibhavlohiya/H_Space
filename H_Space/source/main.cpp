@@ -21,16 +21,19 @@ int main()
 	for (int i = 0; i < exp1.size(); i++)
 		if (i % 2 == 0) exp1[i] = 1;
 
-	Matrix<int, 10, 10> big1(exp1);
+	Matrix<int, 5, 20> big1(exp1);
 	std::cout << "Big matrix1 : " << "\n" << big1 << "\n";
 
 	for (int i = 0; i < exp2.size(); i++)
 		if (i % 2 != 0) exp2[i] = 1;
 
-	Matrix<int, 10, 10> big2(exp2);
+	Matrix<int, 20, 5> big2(exp2);
 	std::cout << "Big matrix2 : " << "\n" << big2 << "\n";
-	
-	std::cout << "Big matrix 1 + Big matrix 2 : " << "\n" << big1 + big2 << "\n";
+
+	Matrix<int, 2, 3> m1({ 1, 2, 3, 4, 5, 6 });
+	Matrix<int, 3, 2> m2({ 7, 8, 9, 10, 11, 12 });
+
+	std::cout << "Result: " << "\n" << big1 * big2; // matrix multiplication of 5x20 and 20x5 matrix.
 
 	std::cin.get();
 
