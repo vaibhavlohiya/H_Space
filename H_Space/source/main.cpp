@@ -5,7 +5,6 @@
 
 int main()
 {
-
 	Scaler<std::string> h("hello"), m("my name is"), v("Vaibhav");
 
 	Matrix<const char*, 2, 3> mat_str({ "Hello", "My" , "name",  "is", "Vaibhav", "Nice to meet you" });
@@ -38,11 +37,9 @@ int main()
 	std::cout << "\n" << m1.GetColumnVector(2) << "\n" << m2 * 10 << "\n"<< m2[1][2];
 
 	std::cout << "\n The matrix m1 is : \n" << m1;
-
 	std::cout << "\n The transpose of m1 is : \n" << m1.Transpose();
 
 	std::cout << "\n The matrix m2 is : \n" << m2;
-
 	std::cout << "\n The tranpose of matrix m2: \n" << m2.Transpose();
 
 	std::cin.get();
