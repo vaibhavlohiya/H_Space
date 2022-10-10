@@ -233,9 +233,9 @@ Matrix<T, M, N> Matrix<T, N, M>::Transpose()
 {
 	Matrix<T, M, N> matrix = {};
 
-	this->m_RowVectorArray = this->m_ColumnVectorArray;
+	matrix.m_RowVectorArray = this->m_ColumnVectorArray;
 
-	return Matrix<T, M, N>(this);
+	return Matrix<T, M, N>(matrix);
 }
 
 template<typename T, size_t N, size_t M>
