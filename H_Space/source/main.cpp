@@ -42,5 +42,7 @@ int main()
 	std::cout << "\n The matrix m2 is : \n" << m2;
 	std::cout << "\n The tranpose of matrix m2: \n" << m2.Transpose();
 
+	std::cout << "The linear index of element of m2 is " << m2.GetLinearIndex(55);
+
 	std::cin.get();
 }

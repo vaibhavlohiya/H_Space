@@ -48,8 +48,8 @@ public:
 
 	template<size_t V>
 	Matrix<T, N, V> prod_Matrix(const Matrix<T,M,V>& other);
-
 	Matrix prod_Scaler(const Scaler<T>& other);
+	Matrix prod_Vector(const Vector<T, N>& other);
 
 	// Class Operator Overloads
 
@@ -60,10 +60,9 @@ public:
 	Matrix operator-(const Scaler<T>& other);	// Subtraction with a Scaler
 
 	template<size_t V>
-	Matrix<T, N, V> operator*(const Matrix<T,M,V>& other); // Multiplication between two Matrices 
-
-	
-	Matrix operator*(const Scaler<T>& other);	// Multiplication with a Scaler
+	Matrix<T, N, V> operator*(const Matrix<T,M,V>& other);     // Multiplication between two Matrices 
+	Matrix operator*(const Scaler<T>& other);	               // Multiplication with a Scaler
+	Matrix operator*(const Vector<T, N>& other);			   // Multiplication with a vector
 
 	Vector<T, M>& operator[](size_t index);              // These operators will return row vectors of given index by default.
 	const Vector<T, M>& operator[](size_t index) const;
