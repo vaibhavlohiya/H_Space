@@ -112,7 +112,7 @@ A mathematical API for tensors till rank 2 (Matrix) which takes user input for t
 ### 11. Matrix operations.
 
        matrix[1];     // returns a row vector of index 1 by default.
-       matrix[1][1]   // returns an element of index (1,1). 
+       matrix[1][1];   // returns an element of index (1,1). 
        
        matrix_add_matrix = matrix1 + matrix2;   // same as add_Matrix.
        matrix_add_scaler = matrix + scaler;     // same as add_Scaler.
